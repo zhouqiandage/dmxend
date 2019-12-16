@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dmx.mapper.UserInfoMapper">
+    <select id="loginUser" resultType="UserInfo" parameterType="UserInfo">
+        select * from userinfo where userName=#{userName} and password=#{password} and status=1
+    </select>
+    <select id="selectUserByUserName" resultType="UserInfo">
+       select userId,userName,password,status,salt from userInfo where username=#{userName}
+   </select>
+    <resultMap id="userMap" type="UserInfo" autoMapping="true">
+        <id property="userId" column="userId"></id>
+        <association property="role" resultMap="roleMap"></association>
+        <association property="userrole" resultMap="urMap"></association>
+    </resultMap>
+    <resultMap id="roleMap" type="cn.dmx.entity.Role" autoMapping="true">
+        <id property="rid" column="rid"></id>
+        <!--<association property="userrole" resultMap="urMap"></association>-->
+    </resultMap>
+    <resultMap id="urMap" type="cn.dmx.entity.Userrole" autoMapping="true">
+        <id column="id" property="id"></id>
+    </resultMap>
+    <select id="queryAllUser" parameterType="String" resultMap="userMap">
+        select u.userId,u.userName,u.status,r.roleName,r.rid,r.roleValue from userinfo u,role r,userrole ur
+        where u.userId=ur.uid and ur.rid=r.rid
+        <if test="userName!=null and userName!=''">
+            and u.userName like '%'||#{userName}||'%'
+        </if>
+        <if test="status!=-1 and status!=''">
+            and u.status=#{status}
+        </if>
+    </select>
+    <select id="queryUser" parameterType="integer" resultType="UserInfo">
+        select * from userInfo where userId=#{userId}
+    </select>
+    <update id="updateUserStatus" parameterType="integer">
+        update userinfo set status=2 where userId=#{userId}
+    </update>
+    <update id="updateUserStatus2" parameterType="integer">
+        update userinfo set status=1 where userId=#{userId}
+    </update>
+    <update id="updatePwd">
+        update userinfo set password=#{password},salt=#{salt} where userId=#{userId}
+    </update>
+    <insert id="addUser" keyProperty="userId" useGeneratedKeys="true">
+        insert into userinfo values(null,#{userName},#{password},#{status},#{salt})
+    </insert>
+
+</mapper>

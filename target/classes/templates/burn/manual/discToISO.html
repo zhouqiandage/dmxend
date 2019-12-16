@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>光盘到ISO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../jquery-3.4.1.js"></script>
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <div class="ok-body-breadcrumb">
+                <span class="layui-breadcrumb">
+                    <a><cite>首页</cite></a>
+                    <a><cite>刻录</cite></a>
+                    <a><cite>手动刻录</cite></a>
+                    <a><cite>复制光盘到ISO文件</cite></a>
+                </span>
+        <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+    </div>
+    <form class="layui-form" action="">
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">基本设置</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">复制模式</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                    <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">复盘盘仓位置</label>
+                                <div class="layui-input-block">
+                                    <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" max="5" value="1" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">原盘数量</label>
+                                <div class="layui-input-block">
+                                    <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" value="1" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">ISO文件存放位置</label>
+                                <div class="layui-input-block">
+                                    <div class="layui-upload">
+                                        <input type="file" class="layui-upload-button" webkitdirectory multiple>
+                                        <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+                                        <button type="button" class="layui-btn" id="test9">开始上传</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+<!--js逻辑-->
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(["element","form","upload"], function () {
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        //选完文件后不自动上传
+        upload.render({
+            elem: '#test8'
+            ,url: '/upload/'//上传接口
+            ,auto: false
+            ,accept: 'file'
+            ,multiple: true
+            ,bindAction: '#test9'
+            ,done: function(res){
+                //上传完毕回调
+                console.log(res)
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

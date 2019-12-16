@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件到光盘</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../jquery-3.4.1.js"></script>
+
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <div class="ok-body-breadcrumb">
+                <span class="layui-breadcrumb">
+                    <a><cite>首页</cite></a>
+                    <a><cite>刻录</cite></a>
+                    <a><cite>手动刻录</cite></a>
+                    <a><cite>文件刻录到光盘</cite></a>
+                </span>
+        <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+    </div>
+    <form class="layui-form" action="">
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">基本设置</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">复制模式</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                    <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">光盘标签</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">文件列表</label>
+                                <div class="layui-input-block">
+                                    <div class="layui-upload">
+                                        <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+                                        <div class="layui-upload-list">
+                                            <table class="layui-table">
+                                                <thead>
+                                                <tr><th>文件名</th>
+                                                    <th>大小</th>
+                                                    <th>状态</th>
+                                                    <th>操作</th>
+                                                </tr></thead>
+                                                <tbody id="demoList"></tbody>
+                                            </table>
+                                        </div>
+                                        <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+                                    </div>
+                                    <!--<input type="number" name="title" lay-verify="title" autocomplete="off" min="1" value="1" class="layui-input">-->
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">刻录数量</label>
+                                <div class="layui-input-block">
+                                    <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" value="1" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">刻录选项</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">刻录速率</label>
+                                <div class="layui-input-block" style="padding-top: 2%">
+                                    <div id="slideTest3" class="demo-slider"></div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否验证</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                </div>
+                                <pre>&#9;</pre>
+                                <label class="layui-form-label">是否关闭光盘</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">打印</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否打印</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                    （待完善需打印数据）
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--js逻辑-->
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(["element","form","slider","upload"], function () {
+        var $ = layui.$
+            ,slider = layui.slider,upload = layui.upload;;
+
+        //设置最大最小值
+        slider.render({
+            elem: '#slideTest3'
+            ,min: 1 //最小值
+            ,max: 56 //最大值
+            ,value: 56
+            ,input: true //输入框
+        });
+        //多文件列表示例
+        var demoListView = $('#demoList')
+            ,uploadListIns = upload.render({
+            elem: '#testList'
+            ,url: '/upload/'
+            ,accept: 'file'
+            ,multiple: true
+            ,auto: false
+            ,bindAction: '#testListAction'
+            ,choose: function(obj){
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function(index, file, result){
+                    var tr = $(['<tr id="upload-'+ index +'">'
+                        ,'<td>'+ file.name +'</td>'
+                        ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                        ,'<td>等待上传</td>'
+                        ,'<td>'
+                        ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        ,'</td>'
+                        ,'</tr>'].join(''));
+
+                    //单个重传
+                    tr.find('.demo-reload').on('click', function(){
+                        obj.upload(index, file);
+                    });
+
+                    //删除
+                    tr.find('.demo-delete').on('click', function(){
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
+
+                    demoListView.append(tr);
+                });
+            }
+            ,done: function(res, index, upload){
+                if(res.code == 0){ //上传成功
+                    var tr = demoListView.find('tr#upload-'+ index)
+                        ,tds = tr.children();
+                    tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                    tds.eq(3).html(''); //清空操作
+                    return delete this.files[index]; //删除文件队列已经上传成功的文件
+                }
+                this.error(index, upload);
+            }
+            ,error: function(index, upload){
+                var tr = demoListView.find('tr#upload-'+ index)
+                    ,tds = tr.children();
+                tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+            }
+        });
+
+    })
+</script>
+</body>
+</html>

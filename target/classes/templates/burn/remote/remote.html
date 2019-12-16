@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连接远程服务器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../jquery-3.4.1.js"></script>
+</head>
+<body>
+
+<!--连接远程服务器-->
+<div id="remote" style="display:none;">
+    <form class="layui-form" id="serverForm" action="">
+        <br>
+        <div class="layui-form-item">
+            <label class="layui-form-label">IP地址：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ip" required  lay-verify="required" value="192.168.1.24" placeholder="请输入IP地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">端口号：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="port" required  lay-verify="required" value="22" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="user" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码框：</label>
+            <div class="layui-input-inline">
+                <input type="password" name="pswd" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(['form','layer'], function () { //独立版的layer无需执行这一句
+        var layer = layui.layer;
+        //弹窗
+        var at = layer.open({
+            type: 1,
+            content: $('#remote') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+        });
+        var form = layui.form;
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            var serverFormData = $("#serverForm").serialize();
+
+            alert(serverFormData);
+            //关闭当前提示窗
+            layer.close(at);
+            return false;
+        });
+    })
+</script>
+</body>
+</html>

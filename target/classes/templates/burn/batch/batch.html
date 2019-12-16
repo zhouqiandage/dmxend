@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>批量刻录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../jquery-3.4.1.js"></script>
+</head>
+<body>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-upload" align="center">
+                        <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+                        <button type="button" class="layui-btn" id="test9">导入任务</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <table class="layui-table" id="batchDate" border="1">
+                        <tr>
+                            <td>ID</td>
+                            <td>名字</td>
+                            <td>性别</td>
+                            <td>角色</td>
+                            <td>时间</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use('upload', function() {
+        var $ = layui.jquery
+            , upload = layui.upload;
+        //文件上传
+        upload.render({
+            elem: '#test8'
+            ,url: '/uadc/excelImport'
+            ,auto: false
+            ,accept: "file"
+            ,field: "uploadFile"
+            //,multiple: true
+            ,bindAction: '#test9'
+            ,done: function(res){
+
+                $.each(res,function (index,item) {
+                    var d = new Date(item.createDate);
+                    //日期格式转换Tue Dec 10 12:12:00 CST 2019 转 2019-12-10 12:12:00
+                    var time = p(d.getFullYear()) + '-' + p((d.getMonth() + 1)) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+
+                    $("#batchDate").append("<tr>" +
+                        "<td>"+item.usId+"</td>" +
+                        "<td>"+item.userName+"</td>" +
+                        "<td>"+item.userSex+"</td>" +
+                        "<td>"+item.userRole+"</td>" +
+                        "<td>"+time+"</td>" +
+                        "</tr>");
+                })
+                console.log(res);
+            }
+        });
+
+
+
+    })
+    /*不够10添加0*/
+    function p(s) {
+        return s < 10 ? '0' + s : s
+    }
+</script>
+</body>
+</html>

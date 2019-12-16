@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <script src="../jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#addButton").click(function () {
+                var data=$("#form").serialize();
+                $.get("/user/doAddUser",data,function (result) {
+                    if(result=='ok'){
+                        alert("添加成功");
+                        location.href("/toPath/queryAllUser");
+                    }else{
+                        alert("添加失败");
+                        location.href("/user/toAddUser");
+                    }
+                })
+            })
+        })
+
+
+    </script>
+</head>
+<body align="center">
+<form action="/user/doAddUser" id="form">
+    <table border="1" >
+    用户名: <input type="text" name="userName"><br>
+    密 码: <input type="password" name="password"><br>
+    角 色: <select name="rid" id="rid"><br>
+    <option value="-1">请选择</option>
+    <option value="" th:each="r:${rolelist}" th:value="${r.rid}">
+        <span th:text="${r.roleValue}"></span>
+    </option>
+
+</select>
+        <input type="button" value="添加" id="addButton">
+    </table>
+</form>
+
+
+</body>
+</html>

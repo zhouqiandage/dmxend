@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  #配置数据源
+  datasource:
+    url: jdbc:sqlite:D:\\sqllite\\easyburn.db
+    driver-class-name: org.sqlite.JDBC
+    username:
+    password:
+    #关闭模板引擎缓存
+  thymeleaf:
+    cache: false
+mybatis:
+  #实体类
+  type-aliases-package: cn.dmx.entity
+  mapper-locations: classpath:/mapper/**.xml

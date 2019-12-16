@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户密码</title>
+    <script src="../jquery-3.4.1.js">
+        $(function () {
+            $("#updatePwd").click(function () {
+                var pwd1=$("#password1").val();
+                var pwd2=$("#password2").val();
+                var pwd3=$("#passwprd3").val();
+                if(pwd1==null ||pwd1==''){
+                    alert("用户名不能为空");
+                    return false;
+                }
+                if(pwd2==null ||pwd2==''){
+                    alert("新密码不能为空");
+                    return false;
+                }
+                if(pwd3!='${userInfo.password}'){
+                    alert("密码不正确");
+                    return false;
+                }
+
+
+
+                var data=$("#form").serialize();
+                $("/user/updatePwd",data,function (result) {
+                    if(result=='ok'){
+                        alert("修改成功");
+                        location.href("/toPath/welcome");
+                    }else{
+                        alert("修改失败");
+                        location.href("/user/toUpdatePwd");
+                    }
+                })
+            })
+        })
+
+
+    </script>
+
+
+</head>
+<body>
+<form id="form">
+    <input type="hidden" name="password" value="${userInfo.password}">
+       旧密码: <input type="password" name="password1">
+       新密码: <input type="password" name="password2">
+       确认密码: <input type="password" name="password3">
+
+    <input type="button" value="修改" id="updatePwd">
+</form>
+</body>
+</html>

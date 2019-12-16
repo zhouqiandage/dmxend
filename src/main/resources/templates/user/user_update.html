@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户个人信息</title>
+</head>
+<body align="center">
+<form action="">
+       用户名:  <input type="text" name="userName" th:value="${info.userName}"><br/>
+       密  码:  <input type="password" name="password" th:value="${info.password}"><br/>
+       状  态:   <span  th:if="${info.status==1}" th:text ="正常" ></span>
+       <input type="button" value="修改">
+</form>
+</body>
+
+</html>

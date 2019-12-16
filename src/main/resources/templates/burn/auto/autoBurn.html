@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>自动刻录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../jquery-3.4.1.js"></script>
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <div class="ok-body-breadcrumb">
+                <span class="layui-breadcrumb">
+                    <a><cite>首页</cite></a>
+                    <a><cite>自动刻录</cite></a>
+                </span>
+        <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+    </div>
+    <br>
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">刻录模式</label>
+            <div class="layui-input-block">
+                <select name="pattern" lay-filter="pattern">
+                    <option value="" selected=""></option>
+                    <option value="0">文件到光盘</option>
+                    <option value="1">光盘到文件</option>
+                    <option value="2">光盘到ISO</option>
+                    <option value="3">光盘到光盘</option>
+                    <option value="4">ISO到光盘</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="display: none">
+        <ul class="layui-tab-title">
+            <li class="layui-this">定时刻录</li>
+            <li>定量刻录</li>
+        </ul>
+        <div class="layui-tab-content" style="height: 100px;">
+            <div class="layui-tab-item layui-show">
+                <!--这里是定时刻录-->
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">一次</li>
+                        <li>每天</li>
+                        <li>每周</li>
+                        <li>每月</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <!--定时刻录一次-->
+                        <div class="layui-tab-item layui-show">
+                            <form class="layui-form" action="">
+                                <table class="layui-table" border="1" align="center">
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test1"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test4"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <!--每天定时刻录-->
+                        <div class="layui-tab-item">
+                            <form class="layui-form" action="">
+                                <table class="layui-table" border="1" align="center">
+                                    <tr align="center">
+                                        <td colspan="4">
+                                            每天最多可选择在四个时间段进行刻录
+                                        </td>
+                                    </tr>
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test01"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test04"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test001"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test004"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test0001"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test0004"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test00001"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test00004"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <!--每周定时刻录-->
+                        <div class="layui-tab-item">
+                            <form class="layui-form" action="">
+                                <table class="layui-table" border="1" align="center">
+                                    <tr align="center">
+                                        <td colspan="4">
+                                            请选择周几定时刻录
+                                        </td>
+                                    </tr>
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test10"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test11"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td>
+                                                    <div class="layui-input-block">
+                                                        <input type="checkbox" name="like[sun]" title="星期日">
+                                                        <input type="checkbox" name="like[mon]" title="星期一">
+                                                        <input type="checkbox" name="like[tues]" title="星期二">
+                                                        <input type="checkbox" name="like[wed]" title="星期三">
+                                                        <input type="checkbox" name="like[thur]" title="星期四">
+                                                        <input type="checkbox" name="like[fri]" title="星期五">
+                                                        <input type="checkbox" name="like[sat]" title="星期六">
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                        <!--每月定时刻录-->
+                        <div class="layui-tab-item">
+                            <form class="layui-form" action="">
+                                <table class="layui-table" border="1" align="center">
+                                    <tr align="center">
+                                        <td colspan="2">
+                                            按月份定时刻录
+                                        </td>
+                                    </tr>
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td colspan="2">
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">开始日期：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test100"
+                                                                   placeholder="yyyy-MM-dd">
+                                                        </div>
+                                                    </div>
+                                                    <div class="layui-inline">
+                                                        <label class="layui-form-label">选择时间：</label>
+                                                        <div class="layui-input-inline">
+                                                            <input type="text" class="layui-input" id="test400"
+                                                                   placeholder="HH:mm:ss">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td align="center">
+                                                    <label class="layui-form-label">月</label>
+                                                </td>
+                                                <td align="center">
+                                                    <div class="layui-input-block">
+                                                        <input type="checkbox" name="like[jan]" title="一月">
+                                                        <input type="checkbox" name="like[feb]" title="二月">
+                                                        <input type="checkbox" name="like[mar]" title="三月">
+                                                        <input type="checkbox" name="like[apr]" title="四月">
+                                                        <input type="checkbox" name="like[may]" title="五月">
+                                                        <input type="checkbox" name="like[jun]" title="六月">
+                                                        <br>
+                                                        <br>
+                                                        <input type="checkbox" name="like[jul]" title="七月">
+                                                        <input type="checkbox" name="like[aug]" title="八月">
+                                                        <input type="checkbox" name="like[sept]" title="九月">
+                                                        <input type="checkbox" name="like[oct]" title="十月">
+                                                        <input type="checkbox" name="like[nov]" title="十一月">
+                                                        <input type="checkbox" name="like[dec]" title="十二月">
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                    <tr align="center">
+                                        <div class="layui-form">
+                                            <div class="layui-form-item">
+                                                <td align="center">
+                                                    <label class="layui-form-label">天</label>
+                                                </td>
+                                                <td align="center">
+                                                    <div class="layui-input-block">
+                                                        <input type="checkbox" name="like[jan]" title="1">
+                                                        <input type="checkbox" name="like[feb]" title="2">
+                                                        <input type="checkbox" name="like[mar]" title="3">
+                                                        <input type="checkbox" name="like[apr]" title="4">
+                                                        <input type="checkbox" name="like[may]" title="5">
+                                                        <input type="checkbox" name="like[jun]" title="6">
+                                                        <input type="checkbox" name="like[jun]" title="7">
+                                                        <input type="checkbox" name="like[jun]" title="8">
+                                                        <br>
+                                                        <br>
+                                                        <input type="checkbox" name="like[jul]" title="9">
+                                                        <input type="checkbox" name="like[aug]" title="10">
+                                                        <input type="checkbox" name="like[sept]" title="11">
+                                                        <input type="checkbox" name="like[oct]" title="12">
+                                                        <input type="checkbox" name="like[nov]" title="13">
+                                                        <input type="checkbox" name="like[dec]" title="14">
+                                                        <input type="checkbox" name="like[dec]" title="15">
+                                                        <input type="checkbox" name="like[dec]" title="16">
+                                                        <br>
+                                                        <br>
+                                                        <input type="checkbox" name="like[jul]" title="17">
+                                                        <input type="checkbox" name="like[aug]" title="18">
+                                                        <input type="checkbox" name="like[sept]" title="19">
+                                                        <input type="checkbox" name="like[oct]" title="20">
+                                                        <input type="checkbox" name="like[nov]" title="21">
+                                                        <input type="checkbox" name="like[dec]" title="22">
+                                                        <input type="checkbox" name="like[dec]" title="23">
+                                                        <input type="checkbox" name="like[dec]" title="24">
+                                                        <br>
+                                                        <br>
+                                                        <input type="checkbox" name="like[jul]" title="25">
+                                                        <input type="checkbox" name="like[aug]" title="26">
+                                                        <input type="checkbox" name="like[sept]" title="27">
+                                                        <input type="checkbox" name="like[oct]" title="28">
+                                                        <input type="checkbox" name="like[nov]" title="29">
+                                                        <input type="checkbox" name="like[dec]" title="30">
+                                                        <input type="checkbox" name="like[dec]" title="31">
+                                                    </div>
+                                                </td>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <!--这里是定量刻录-->
+                <table class="layui-table" border="1">
+                    <div class="layui-form-item">
+                        <tr>
+                            <td align="right">
+                                <label class="layui-text">设置文件达到几GB时开始刻录</label>
+                            </td>
+                            <td align="left">
+                                <div class="layui-input-inline">
+                                    <input type="number" name="username" lay-verify="required" placeholder="请输入"
+                                           autocomplete="off" class="layui-input">
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+            <!--参数设置-->
+            <form class="layui-form" action="">
+                <table class="layui-table" border="1" align="center">
+                    <tr>
+                        <td>
+                            <div class="layui-card-body">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">是否打印</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="close" lay-skin="switch"
+                                               lay-text="ON|OFF">
+                                        （待完善需打印数据）
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="layui-form-item" pane="">
+                                <label class="layui-form-label">分盘或分割设置</label>
+                                <div class="layui-input-block">
+                                    <!--分割分盘-->
+                                    <input type="radio" name="fen" lay-filter="fen" value="0"
+                                           title="按光盘容量分盘，热文件夹中的单个文件或文件夹小于光盘容量" checked="">
+                                    <input type="radio" name="fen" lay-filter="fen" value="1"
+                                           title="自动按光盘容量分割">
+                                    <br>
+                                    <div id="fenFile" style="display: none;">
+                                        <div class="layui-form-item" pane="">
+                                            <label class="layui-form-label">分割文件存放目录</label>
+                                            <div class="layui-input-block" style="padding-top: 2%;">
+                                                <input type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="layui-form-item" pane="">
+                                <div class="layui-input-block">
+                                    <!--分割分盘-->
+                                    <input type="radio" name="moveDel" lay-filter="moveDel" value="0"
+                                           title="移动已刻录文件">
+                                    <br>
+                                    <div id="moveDel" style="display: none;">
+                                        <div class="layui-form-item" pane="">
+                                            <div class="layui-input-block" style="padding-top: 2%;">
+                                                <input type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="radio" name="moveDel" lay-filter="moveDel" value="1"
+                                           title="删除已刻录文件" checked="">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button type="submit" class="layui-btn" lay-submit=""
+                                            lay-filter="demo1">立即提交
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<!--js逻辑-->
+<script src="../layui/layui.js"></script>
+<script>
+    /*
+     *title 标题
+     * ele 自动刻录设置
+     * burn 展示刻录模式
+     */
+    function manualAlert(title, burn) {
+        layer.open({
+            type: 1,
+            title: title,
+            btn: ['确定', '取消']
+            , yes: function (index, layero) {
+                //按钮【确定】的回调
+                $("div[lay-filter='docDemoTabBrief']").css("display", "");
+                layer.close(index);
+            }
+            , btn2: function (index, layero) {
+                //按钮【按取消】的回调
+                layer.close(index);
+                //return false 开启该代码可禁止点击该按钮关闭
+            },
+            area: ["80%", "90%"],
+            content: $("" + burn + "") //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+        });
+    }
+
+    layui.use(["element", "laydate", "form", "layer", "slider", "upload"], function () {
+        var laydate = layui.laydate;
+        var form = layui.form;
+        /*下拉框单击事件*/
+        form.on('select(pattern)', function (data) {
+            var value = data.value;//得到被选中的值
+            console.log(value);
+            switch (value) {
+                case "0":
+                    manualAlert("文件到光盘", "#ftd");
+                    break;
+                case "1":
+                    manualAlert("光盘到文件", "#dtf");
+                    break;
+                case "2":
+                    manualAlert("光盘到ISO", "#dti");
+                    break;
+                case "3":
+                    manualAlert("光盘到光盘", "#dtd");
+                    break;
+                case "4":
+                    manualAlert("ISO到光盘", "#itd");
+                    break;
+                default:
+                    $("div[lay-filter='docDemoTabBrief']").css("display", "none");
+            }
+        });
+        /*单选框单击事件*/
+        form.on('radio(fen)', function (data) {
+            console.log(data.value); //被点击的radio的value值
+            if (data.value == 0) {
+                $("#fenFile").css("display", "none");
+            } else {
+                $("#fenFile").css("display", "");
+            }
+        });
+        form.on('radio(moveDel)', function (data) {
+            console.log(data.value); //被点击的radio的value值
+            if (data.value == 1) {
+                $("#moveDel").css("display", "none");
+            } else {
+                $("#moveDel").css("display", "");
+            }
+        });
+        //时间选择器
+        laydate.render({
+            elem: '#test1'
+        });
+        laydate.render({
+            elem: '#test4'
+            , type: 'time'
+        });
+        laydate.render({
+            elem: '#test01'
+        });
+        laydate.render({
+            elem: '#test04'
+            , type: 'time'
+        });
+        laydate.render({
+            elem: '#test001'
+        });
+        laydate.render({
+            elem: '#test004'
+            , type: 'time'
+        });
+        laydate.render({
+            elem: '#test0001'
+        });
+        laydate.render({
+            elem: '#test0004'
+            , type: 'time'
+        });
+        laydate.render({
+            elem: '#test00001'
+        });
+        laydate.render({
+            elem: '#test00004'
+            , type: 'time'
+        });
+        laydate.render({
+            elem: '#test10'
+        });
+        laydate.render({
+            elem: '#test11'
+            , type: 'time'
+        });
+        laydate.render({
+            elem: '#test100'
+        });
+        laydate.render({
+            elem: '#test400'
+            , type: 'time'
+        });
+
+        /*文件到光盘*/
+        var slider = layui.slider, upload = layui.upload;
+        //设置最大最小值
+        slider.render({
+            elem: '#slideTest3'
+            , min: 1 //最小值
+            , max: 56 //最大值
+            , value: 56
+            , input: true //输入框
+        });
+        slider.render({
+            elem: '#suLv'
+            , min: 1 //最小值
+            , max: 56 //最大值
+            , value: 56
+            , input: true //输入框
+        });
+        slider.render({
+            elem: '#suLv1'
+            , min: 1 //最小值
+            , max: 56 //最大值
+            , value: 56
+            , input: true //输入框
+        });
+        //多文件列表示例
+        var demoListView = $('#demoList')
+            , uploadListIns = upload.render({
+            elem: '#testList'
+            , url: '/upload/'
+            , accept: 'file'
+            , multiple: true
+            , auto: false
+            , bindAction: '#testListAction'
+            , choose: function (obj) {
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                //读取本地文件
+                obj.preview(function (index, file, result) {
+                    var tr = $(['<tr id="upload-' + index + '">'
+                        , '<td>' + file.name + '</td>'
+                        , '<td>' + (file.size / 1014).toFixed(1) + 'kb</td>'
+                        , '<td>等待上传</td>'
+                        , '<td>'
+                        , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                        , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                        , '</td>'
+                        , '</tr>'].join(''));
+
+                    //单个重传
+                    tr.find('.demo-reload').on('click', function () {
+                        obj.upload(index, file);
+                    });
+
+                    //删除
+                    tr.find('.demo-delete').on('click', function () {
+                        delete files[index]; //删除对应的文件
+                        tr.remove();
+                        uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                    });
+
+                    demoListView.append(tr);
+                });
+            }
+            , done: function (res, index, upload) {
+                if (res.code == 0) { //上传成功
+                    var tr = demoListView.find('tr#upload-' + index)
+                        , tds = tr.children();
+                    tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                    tds.eq(3).html(''); //清空操作
+                    return delete this.files[index]; //删除文件队列已经上传成功的文件
+                }
+                this.error(index, upload);
+            }
+            , error: function (index, upload) {
+                var tr = demoListView.find('tr#upload-' + index)
+                    , tds = tr.children();
+                tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+            }
+        });
+
+        upload.render({
+            elem: '#xuanZeFile'
+            , url: '/upload/'//上传接口
+            , auto: false
+            , accept: 'file'
+            , multiple: true
+            , bindAction: '#kaiShiUp'
+            , done: function (res) {
+                //上传完毕回调
+                console.log(res)
+            }
+            , error: function () {
+                //请求异常回调
+            }
+        });
+        upload.render({
+            elem: '#test8'
+            , url: '/upload/'//上传接口
+            , auto: false
+            , accept: 'file'
+            , multiple: true
+            , bindAction: '#test9'
+            , done: function (res) {
+                //上传完毕回调
+                console.log(res)
+            }
+            , error: function () {
+                //请求异常回调
+            }
+        });
+    });
+
+
+</script>
+</body>
+<!--文件到光盘-->
+<div class="layui-row layui-col-space15" id="ftd" style="display: none;">
+    <form class="layui-form" action="">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">基本设置</div>
+                <div class="layui-card-body">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">复制模式</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                            <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">光盘标签</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文件列表</label>
+                        <div class="layui-input-block">
+                            <div class="layui-upload">
+                                <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+                                <div class="layui-upload-list">
+                                    <table class="layui-table">
+                                        <thead>
+                                        <tr>
+                                            <th>文件名</th>
+                                            <th>大小</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="demoList"></tbody>
+                                    </table>
+                                </div>
+                                <button type="button" class="layui-btn" id="testListAction">开始上传</button>
+                            </div>
+                            <!--<input type="number" name="title" lay-verify="title" autocomplete="off" min="1" value="1" class="layui-input">-->
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">刻录数量</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" value="1"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">刻录选项</div>
+                <div class="layui-card-body">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">刻录速率</label>
+                        <div class="layui-input-block" style="padding-top: 2%">
+                            <div id="slideTest3" class="demo-slider"></div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否验证</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                        </div>
+                        <pre>&#9;</pre>
+                        <label class="layui-form-label">是否关闭光盘</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">打印</div>
+                <div class="layui-card-body">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否打印</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                            （待完善需打印数据）
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--光盘到文件-->
+<form class="layui-form" id="dtf" style="display: none;" action="">
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">基本设置</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复制模式</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复盘盘仓位置</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" max="5"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">原盘数量</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">文件存放位置</label>
+                            <div class="layui-input-block">
+                                <div class="layui-upload">
+                                    <input type="file" class="layui-upload-button" webkitdirectory multiple>
+                                    <button type="button" class="layui-btn layui-btn-normal" id="xuanZeFile">选择文件
+                                    </button>
+                                    <button type="button" class="layui-btn" id="kaiShiUp">开始上传</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--光盘到ISO-->
+<form class="layui-form" id="dti" style="display: none;" action="">
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">基本设置</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复制模式</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复盘盘仓位置</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" max="5"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">原盘数量</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">ISO文件存放位置</label>
+                            <div class="layui-input-block">
+                                <div class="layui-upload">
+                                    <input type="file" class="layui-upload-button" webkitdirectory multiple>
+                                    <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+                                    <button type="button" class="layui-btn" id="test9">开始上传</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--光盘到光盘-->
+<form class="layui-form" id="dtd" style="display: none;" action="">
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">基本设置</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复制模式</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复盘盘仓位置</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" max="5"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">原盘数量</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">刻录数量</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">刻录选项</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">刻录速率</label>
+                            <div class="layui-input-block" style="padding-top: 2%">
+                                <div id="suLv" class="demo-slider"></div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否验证</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">打印</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否打印</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                （待完善需打印数据）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--ISO到光盘-->
+<form class="layui-form" id="itd" style="display: none;" action="">
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">基本设置</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">复制模式</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">ISO文件位置</label>
+                            <div class="layui-input-block">
+                                <input type="file" name="title" lay-verify="title" autocomplete="off" min="1" max="5"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">刻录数量</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="title" lay-verify="title" autocomplete="off" min="1"
+                                       value="1" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">刻录选项</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">刻录速率</label>
+                            <div class="layui-input-block" style="padding-top: 2%">
+                                <div id="suLv1" class="demo-slider"></div>
+
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否验证</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">打印</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否打印</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                （待完善需打印数据）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</html>

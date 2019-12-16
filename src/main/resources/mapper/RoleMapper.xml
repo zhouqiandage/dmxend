@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dmx.mapper.RoleMapper">
+
+    <select id="selectRoleByUserId"  parameterType="integer" resultType="Role">
+     select r.* from role r left JOIN userrole ur on r.rid=ur.rid  where ur.uid=#{userid}
+    </select>
+    <select id="queryRole" resultType="Role">
+        select rid,roleName,roleValue from role
+    </select>
+</mapper>

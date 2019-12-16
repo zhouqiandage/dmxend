@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ISO到光盘</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../jquery-3.4.1.js"></script>
+
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <div class="ok-body-breadcrumb">
+                <span class="layui-breadcrumb">
+                    <a><cite>首页</cite></a>
+                    <a><cite>刻录</cite></a>
+                    <a><cite>手动刻录</cite></a>
+                    <a><cite>ISO到光盘</cite></a>
+                </span>
+        <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+    </div>
+    <form class="layui-form" action="">
+        <div style="padding: 20px; background-color: #F2F2F2;">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">基本设置</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">复制模式</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" name="pattern" value="简单模式" title="简单模式" checked="">
+                                    <input type="radio" name="pattern" value="队列模式" title="队列模式">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">ISO文件位置</label>
+                                <div class="layui-input-block">
+                                    <input type="file" name="title" lay-verify="title" autocomplete="off" min="1" max="5" value="1" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">刻录数量</label>
+                                <div class="layui-input-block">
+                                    <input type="number" name="title" lay-verify="title" autocomplete="off" min="1" value="1" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">刻录选项</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">刻录速率</label>
+                                <div class="layui-input-block" style="padding-top: 2%">
+                                    <div id="slideTest3" class="demo-slider"></div>
+
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否验证</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-card">
+                        <div class="layui-card-header">打印</div>
+                        <div class="layui-card-body">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">是否打印</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                    （待完善需打印数据）
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--js逻辑-->
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use(["element","form","slider"], function () {
+        var $ = layui.$
+            ,slider = layui.slider;
+        //设置最大最小值
+        slider.render({
+            elem: '#slideTest3'
+            ,min: 1 //最小值
+            ,max: 56 //最大值
+            ,value: 56
+            ,input: true //输入框
+        });
+
+    })
+</script>
+</body>
+</html>
