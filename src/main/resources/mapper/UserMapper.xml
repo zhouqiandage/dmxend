@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.dmx.mapper.UserInfoMapper">
     <select id="loginUser" resultType="UserInfo" parameterType="UserInfo">
-        select * from userinfo where userName=#{userName} and password=#{password} and status=1
+        select * from userinfo where userName=#{userName} and password=#{password} and status=1 or status=0
     </select>
     <select id="selectUserByUserName" resultType="UserInfo">
        select userId,userName,password,status,salt from userInfo where username=#{userName}
@@ -18,12 +18,12 @@
         <id property="rid" column="rid"></id>
         <!--<association property="userrole" resultMap="urMap"></association>-->
     </resultMap>
-    <resultMap id="urMap" type="cn.dmx.entity.Userrole" autoMapping="true">
+    <resultMap id="urMap" type="cn.dmx.entity.UserRole" autoMapping="true">
         <id column="id" property="id"></id>
     </resultMap>
     <select id="queryAllUser" parameterType="String" resultMap="userMap">
         select u.userId,u.userName,u.status,r.roleName,r.rid,r.roleValue from userinfo u,role r,userrole ur
-        where u.userId=ur.uid and ur.rid=r.rid
+        where u.userId=ur.uid and ur.rid=r.rid and status!=0
         <if test="userName!=null and userName!=''">
             and u.userName like '%'||#{userName}||'%'
         </if>

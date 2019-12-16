@@ -153,7 +153,7 @@ public class UserInfoController {
 
     //修改用户密码
     @ResponseBody
-    @RequestMapping("updatePwd")
+    @RequestMapping("doUpdatePwd")
     public String updatePwd(UserInfo userInfo){
         Integer count=userInfoService.updatePwd(userInfo);
         if(count>0){

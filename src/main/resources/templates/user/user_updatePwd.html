@@ -3,33 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>修改用户密码</title>
-    <script src="../jquery-3.4.1.js">
+    <script src="../jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
         $(function () {
             $("#updatePwd").click(function () {
-                var pwd1=$("#password1").val();
-                var pwd2=$("#password2").val();
-                var pwd3=$("#passwprd3").val();
-                if(pwd1==null ||pwd1==''){
-                    alert("用户名不能为空");
-                    return false;
-                }
-                if(pwd2==null ||pwd2==''){
-                    alert("新密码不能为空");
-                    return false;
-                }
-                if(pwd3!='${userInfo.password}'){
-                    alert("密码不正确");
-                    return false;
-                }
+                var pwd1 = $("#password1").val();
+                var pwd2 = $("#password2").val();
+                var pwd3 = $("#passwprd3").val();
+                /*  if(pwd1==null ||pwd1==''){
+                      alert("旧密码不能为空");
+                      return false;
+                  }
+                  if(pwd2==null ||pwd2==''){
+                      alert("新密码不能为空");
+                      return false;
+                  }
+                  if(pwd3==null ||pwd3==''){
+                      alert("确认密码不能为空");
+                      return false;
+                  }
+                  if(pwd3!='${userInfo.password}'){
+                      alert("密码不正确");
+                      return false;
+                  }
+  */
 
 
-
-                var data=$("#form").serialize();
-                $("/user/updatePwd",data,function (result) {
-                    if(result=='ok'){
+                var data = $("#form").serialize();
+                $("/user/doUpdatePwd", data, function (result) {
+                    if (result == 'ok') {
                         alert("修改成功");
                         location.href("/toPath/welcome");
-                    }else{
+                    } else {
                         alert("修改失败");
                         location.href("/user/toUpdatePwd");
                     }
@@ -37,17 +43,17 @@
             })
         })
 
-
     </script>
 
 
 </head>
-<body>
+<body align="center">
 <form id="form">
     <input type="hidden" name="password" value="${userInfo.password}">
-       旧密码: <input type="password" name="password1">
-       新密码: <input type="password" name="password2">
-       确认密码: <input type="password" name="password3">
+    <input type="hidden" name="userId" value="${userInfo.userId}">
+    旧密码: &nbsp;&nbsp;&nbsp;<input type="password" name="password"><br>
+    新密码: &nbsp;&nbsp;&nbsp;<input type="password" name="password"><br>
+    确认密码:&nbsp;<input type="password" name="password"><br>
 
     <input type="button" value="修改" id="updatePwd">
 </form>

@@ -1,6 +1,6 @@
 package cn.dmx.mapper;
 
-import cn.dmx.entity.Userrole;
+import cn.dmx.entity.UserRole;
 
 public interface UserroleMapper {
 
@@ -10,6 +10,6 @@ public interface UserroleMapper {
      * @param userrole 管理关联实体类
      * @return  rows
      */
-    Integer addUserrole(Userrole userrole);
+    Integer addUserrole(UserRole userrole);
 
 }

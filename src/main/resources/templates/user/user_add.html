@@ -7,12 +7,12 @@
     <script type="text/javascript">
         $(function () {
             $("#addButton").click(function () {
-                var data=$("#form").serialize();
-                $.get("/user/doAddUser",data,function (result) {
-                    if(result=='ok'){
+                var data = $("#form").serialize();
+                $.get("/user/doAddUser", data, function (result) {
+                    if (result == 'ok') {
                         alert("添加成功");
                         location.href("/toPath/queryAllUser");
-                    }else{
+                    } else {
                         alert("添加失败");
                         location.href("/user/toAddUser");
                     }
@@ -25,16 +25,16 @@
 </head>
 <body align="center">
 <form action="/user/doAddUser" id="form">
-    <table border="1" >
-    用户名: <input type="text" name="userName"><br>
-    密 码: <input type="password" name="password"><br>
-    角 色: <select name="rid" id="rid"><br>
-    <option value="-1">请选择</option>
-    <option value="" th:each="r:${rolelist}" th:value="${r.rid}">
-        <span th:text="${r.roleValue}"></span>
-    </option>
+    <table border="1">
+        用户名: <input type="text" name="userName"><br>
+        密 码: <input type="password" name="password"><br>
+        角 色: <select name="rid" id="rid"><br>
+        <option value="-1">请选择</option>
+        <option value="" th:each="r:${rolelist}" th:value="${r.rid}">
+            <span th:text="${r.roleValue}"></span>
+        </option>
 
-</select>
+    </select>
         <input type="button" value="添加" id="addButton">
     </table>
 </form>

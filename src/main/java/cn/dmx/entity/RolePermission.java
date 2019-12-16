@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rolepermission {
+public class RolePermission {
     private Integer id;//角色权限id
     private Integer rid; //角色id
     private Integer pid; //权限id

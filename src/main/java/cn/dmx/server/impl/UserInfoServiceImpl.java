@@ -2,13 +2,11 @@ package cn.dmx.server.impl;
 
 import cn.dmx.entity.UserBO;
 import cn.dmx.entity.UserInfo;
-import cn.dmx.entity.Userrole;
+import cn.dmx.entity.UserRole;
 import cn.dmx.mapper.UserInfoMapper;
 import cn.dmx.mapper.UserroleMapper;
 import cn.dmx.server.UserInfoService;
 import cn.dmx.utils.MD5Util;
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
-import org.apache.commons.collections4.SplitMapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,7 +103,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         //已经插入成功的用户
         Integer userId = userInfo.getUserId();
         //创建用户跟角色的关联
-        Userrole userrole = new Userrole();
+        UserRole userrole = new UserRole();
         userrole.setRid(Userbo.getRid());
         userrole.setUid(userId);
         //添加数据

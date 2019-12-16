@@ -23,7 +23,7 @@ public class UserInfo {
     private Integer status; //用户状态
     private String salt;  //加密盐值
     private Role role;  //角色实体
-    private Userrole userrole; //用户角色实体
+    private UserRole userrole; //用户角色实体
 
     public Role getRole() {
         return role;
@@ -33,11 +33,11 @@ public class UserInfo {
         this.role = role;
     }
 
-    public Userrole getUserrole() {
+    public UserRole getUserrole() {
         return userrole;
     }
 
-    public void setUserrole(Userrole userrole) {
+    public void setUserrole(UserRole userrole) {
         this.userrole = userrole;
     }
 

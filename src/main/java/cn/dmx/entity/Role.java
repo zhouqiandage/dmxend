@@ -18,13 +18,13 @@ public class Role {
     private Integer rid; //角色id
     private String roleName; //角色名称
     private String roleValue; //角色值
-    private Userrole userrole;
+    private UserRole userrole;
 
-    public Userrole getUserrole() {
+    public UserRole getUserrole() {
         return userrole;
     }
 
-    public void setUserrole(Userrole userrole) {
+    public void setUserrole(UserRole userrole) {
         this.userrole = userrole;
     }
 

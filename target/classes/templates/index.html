@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="../admin/css/admin.css"/>
     <script src="../jquery-3.4.1.js"></script>
     <script src="../layui/layui.js"></script>
+    <!--session永不过期-->
+    <script id=Back language=javascript></script>
 </head>
 <body>
 <div class="main-layout" id='main-layout'>
@@ -54,7 +56,7 @@
                 <a href="javascript:;" data-url="email.html" data-id='6' data-text="邮件系统"><i
                         class="iconfont">&#xe603;</i>封面设计</a>
             </li>
-            <li class="layui-nav-item" >
+            <li class="layui-nav-item" shiro:hasRole="admin">
                 <a href="javascript:;" data-url="/autoBurn" data-id='7' data-text="用户管理"><i class="iconfont">&#xe60d;</i>用户管理</a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:" data-url="/toPath/queryAllUser" data-id='1' data-text="所有用户"  shiro:hasPermission="admin:queryUser"><span
@@ -87,6 +89,9 @@
                 <li class="layui-nav-item">
                       <a th:href="@{/user/queryUser(userId=${session.userInfo.userId})}" data-url="" data-id='5' data-text="个人信息" th:text="${session.userInfo.userName}"></a>
                 </li>
+                <li class="layui-nav-item">
+                    <a href="/user/toUpdatePwd" data-url="" data-id='5' data-text="个人信息" th:text="修改密码"></a>
+                </li>
                 <li class="layui-nav-item"><a href="javascript:if(confirm('确实要退出吗?')) location='/logout'">退出</a></li>
             </ul>
         </div>
@@ -114,6 +119,15 @@
     </div>
 </div>
 <script type="text/javascript">
+
+    //session不过期
+    function keepsession(){
+        document.all["Back"].src="/blog/SessionKeeper.asp?RandStr="+Math.random();
+//这里的RandStr=Math.random只是为了让每次back.src的值不同，防止同一地址刷新无效的情况
+        window.setTimeout("keepsession()",900000); //每隔900秒调用一下本身
+    }
+    keepsession();
+
 </script>
 <script src="../admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 <script src="../admin/js/common.js" type="text/javascript" charset="utf-8"></script>
