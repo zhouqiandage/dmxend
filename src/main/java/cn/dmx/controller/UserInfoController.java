@@ -147,8 +147,10 @@ public class UserInfoController {
     }
     //去修改密码
     @RequestMapping("toUpdatePwd")
-    public String toUpdatepwd(){
-        return "/user/user_updatePwd";
+    public String toUpdatepwd(Integer userId,Model model){
+        UserInfo userInfo=userInfoService.queryUser(userId);
+        model.addAttribute("user",userInfo);
+        return "/user/user_password";
     }
 
     //修改用户密码

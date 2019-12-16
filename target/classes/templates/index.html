@@ -57,17 +57,21 @@
                         class="iconfont">&#xe603;</i>封面设计</a>
             </li>
             <li class="layui-nav-item" shiro:hasRole="admin">
-                <a href="javascript:;" data-url="/autoBurn" data-id='7' data-text="用户管理"><i class="iconfont">&#xe60d;</i>用户管理</a>
+                <a href="javascript:;" data-url="/autoBurn" data-id='7' data-text="用户管理"><i
+                        class="iconfont">&#xe60d;</i>用户管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:" data-url="/toPath/queryAllUser" data-id='1' data-text="所有用户"  shiro:hasPermission="admin:queryUser"><span
+                    <dd><a href="javascript:" data-url="/toPath/queryAllUser" data-id='1' data-text="所有用户"
+                           shiro:hasPermission="admin:queryUser"><span
                             class="l-line"></span>所有用户</a></dd>
                     <dd><a href="javascript:" data-url="/user/toAddUser" data-id='12' data-text="添加用户"><span
                             class="l-line"></span>添加用户</a></dd>
-                    <dd><a href="javascript:" th:data-url="@{/user/queryUser(userId=${session.userInfo.userId})}" data-id='11' data-text="个人信息"><span
+                    <dd><a href="javascript:" th:data-url="@{/user/queryUser(userId=${session.userInfo.userId})}"
+                           data-id='11' data-text="个人信息"><span
                             class="l-line"></span>个人信息</a></dd>
-                    <dd><a href="javascript:" th:data-url="@{/user/toUpdateUser(userId=${session.userInfo.userId})}" data-id='11' data-text="修改密码"><span
+                    <dd><a href="javascript:" th:data-url="@{/user/toUpdateUser(userId=${session.userInfo.userId})}"
+                           data-id='11' data-text="修改密码"><span
                             class="l-line"></span>修改密码</a></dd>
-             </li>
+            </li>
             <li class="layui-nav-item">
                 <a href="javascript:;" data-url="system.html" data-id='9' data-text="系统设置"><i
                         class="iconfont">&#xe60b;</i>系统设置</a>
@@ -87,7 +91,8 @@
                 <li class="layui-nav-item"><a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统"><i
                         class="iconfont">&#xe603;</i></a></li>
                 <li class="layui-nav-item">
-                      <a th:href="@{/user/queryUser(userId=${session.userInfo.userId})}" data-url="" data-id='5' data-text="个人信息" th:text="${session.userInfo.userName}"></a>
+                    <a th:href="@{/user/queryUser(userId=${session.userInfo.userId})}" data-url="" data-id='5'
+                       data-text="个人信息" th:text="${session.userInfo.userName}"></a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="/user/toUpdatePwd" data-url="" data-id='5' data-text="个人信息" th:text="修改密码"></a>
@@ -105,7 +110,8 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show" style="background: #f5f5f5;">
                         <!--1-->
-                        <iframe src="/toPath/welcome" width="100%" height="100%" name="iframe" scrolling="auto" class="iframe"
+                        <iframe src="/toPath/welcome" width="100%" height="100%" name="iframe" scrolling="auto"
+                                class="iframe"
                                 framborder="0"></iframe>
                         <!--1end-->
                     </div>
@@ -121,11 +127,12 @@
 <script type="text/javascript">
 
     //session不过期
-    function keepsession(){
-        document.all["Back"].src="/blog/SessionKeeper.asp?RandStr="+Math.random();
+    function keepsession() {
+        document.all["Back"].src = "/blog/SessionKeeper.asp?RandStr=" + Math.random();
 //这里的RandStr=Math.random只是为了让每次back.src的值不同，防止同一地址刷新无效的情况
-        window.setTimeout("keepsession()",900000); //每隔900秒调用一下本身
+        window.setTimeout("keepsession()", 900000); //每隔900秒调用一下本身
     }
+
     keepsession();
 
 </script>

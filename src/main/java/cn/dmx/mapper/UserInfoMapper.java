@@ -22,7 +22,7 @@ public interface UserInfoMapper {
     //查看个人信息
     UserInfo queryUser(Integer userId);
 
-    //修改个人信息
+    //修改用户密码
     Integer updatePwd(UserInfo userInfo);
 
     //修改用户状态

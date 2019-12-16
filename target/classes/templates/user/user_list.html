@@ -31,15 +31,15 @@
         <td>
             <span th:if="*{status}=='1'">正常</span>
             <span th:if="*{status}=='2'">冻结</span>
-
-
         </td>
         <td>
             <input type="button" th:if="*{status==1}" th:onclick="if(confirm('是否冻结？'))fro([[*{userId}]])" value="冻结"
                    id="fro">
             <input type="button" th:if="*{status==2}" th:onclick="if(confirm('是否恢复？'))ret([[*{userId}]])" value="恢复"
                    id="ret">
-         
+        </td>
+        <td>
+            <a th:href="@{/user/toUpdatePwd(userId=*{userId})}">重置密码</a>
         </td>
     </tr>
 </table>
@@ -47,7 +47,6 @@
 <script type="text/javascript">
     function fro(e) {
         console.log(e);
-
         $.post("/user/updateUserState1", "userId=" + e, function (result) {
             if (result == 'ok') {
                 alert("冻结成功");

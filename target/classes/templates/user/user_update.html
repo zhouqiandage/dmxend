@@ -6,10 +6,10 @@
 </head>
 <body align="center">
 <form action="">
-       用户名:  <input type="text" name="userName" th:value="${info.userName}"><br/>
-       状  态:   <span  th:if="${info.status==1}" th:text ="正常" ></span>
-                 <span  th:if="${info.status==0}" th:text ="管理员" ></span><br>
-       <input type="button" value="修改">
+    用户名: <input type="text" name="userName" th:value="${info.userName}"><br/>
+    状 态: <span th:if="${info.status==1}" th:text="正常"></span>
+    <span th:if="${info.status==0}" th:text="管理员"></span><br>
+    <input type="button" value="修改">
 </form>
 </body>
 
