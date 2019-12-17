@@ -11,6 +11,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -76,6 +78,10 @@ public class UserInfoController {
             model.addAttribute("msg", "未知异常");
             return "user/login";
         }
+        //登陆成功之后  可以验证密码的 存入
+        String password = users.getPassword();
+        System.out.println(password);
+        session.setAttribute("pwd",password);
         //拿出来session  进行比对他所属职位
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         return "/index";
@@ -155,6 +161,32 @@ public class UserInfoController {
         return "/user/user_password2";
     }
 
+     @ResponseBody
+    @RequestMapping("checkPassport")
+    public String checkPassport(HttpSession session,String newPassword){
+        String password= (String) session.getAttribute("pwd");
+        if(newPassword.trim()==""){
+            return "false";
+        }
+
+        if(password.equals(newPassword)){
+            return "true";
+        }
+        return "false";
+    }
+
+
+  //修改用户密码
+    @ResponseBody
+    @RequestMapping("doUpdatePwd1")
+    public String updatePwd1(UserInfo userInfo){
+        Integer count=userInfoService.updatePwd(userInfo);
+        if(count>0){
+            return "ok";
+        }else{
+            return "error";
+        }
+    }
     //管理员重置修改密码
     @RequestMapping("toUpdatePwd")
     public String toUpdatepwd(Integer userId,Model model){
