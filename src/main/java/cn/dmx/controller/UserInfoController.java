@@ -87,10 +87,7 @@ public class UserInfoController {
         model.addAttribute("info",userInfo);
         return "user/user_update";
     }
-    @RequestMapping("toUpdateUser")
-    public String toUpdateUser(){
-        return "user/user_password";
-    }
+
 
     //修改用户状态
     @ResponseBody
@@ -103,6 +100,7 @@ public class UserInfoController {
             return "error";
         }
     }
+    //修改用户状态
     @ResponseBody
     @RequestMapping("updateUserState2")
     public String updateUserState2(Integer userId){
@@ -114,13 +112,16 @@ public class UserInfoController {
         }
     }
     //退出
-    @ResponseBody
     @RequestMapping("logout")
     public String logout(){
         //登出清除缓存
-        Subject currentUser = SecurityUtils.getSubject();
-        currentUser.logout();
-        return "";
+        //使用权限管理工具进行用户的退出，跳出登录，给出提示信息
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
+        }
+        return "/user/login";
+
     }
 
     //去添加用户
@@ -145,7 +146,16 @@ public class UserInfoController {
             return "error";
         }
     }
-    //去修改密码
+
+    //用户修改自己密码
+    @RequestMapping("toUpdatePwd2")
+    public String toUpdatepwd1(Integer userId,Model model){
+        UserInfo userInfo=userInfoService.queryUser(userId);
+        model.addAttribute("user",userInfo);
+        return "/user/user_password2";
+    }
+
+    //管理员重置修改密码
     @RequestMapping("toUpdatePwd")
     public String toUpdatepwd(Integer userId,Model model){
         UserInfo userInfo=userInfoService.queryUser(userId);

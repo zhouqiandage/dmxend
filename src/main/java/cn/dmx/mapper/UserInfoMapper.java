@@ -1,6 +1,5 @@
 package cn.dmx.mapper;
 
-import cn.dmx.entity.UserBO;
 import cn.dmx.entity.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +21,7 @@ public interface UserInfoMapper {
     //查看个人信息
     UserInfo queryUser(Integer userId);
 
-    //修改用户密码
+    // 管理员修改用户密码
     Integer updatePwd(UserInfo userInfo);
 
     //修改用户状态

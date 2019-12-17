@@ -74,6 +74,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         //重新set
         userInfo.setSalt(salt);
         userInfo.setPassword(password);
+        System.out.println("新的密码"+password);
         return userInfoMapper.updatePwd(userInfo);
     }
 

@@ -24,7 +24,7 @@ public interface UserInfoService {
     //修改用户状态2
     Integer updateUserStatus2(Integer userId);
 
-    //修改用户密码
+    // 管理员修改用户密码
     Integer updatePwd(UserInfo userInfo);
 
 

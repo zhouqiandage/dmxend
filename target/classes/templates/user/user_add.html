@@ -11,10 +11,10 @@
                 $.get("/user/doAddUser", data, function (result) {
                     if (result == 'ok') {
                         alert("添加成功");
-                        location.href("/toPath/queryAllUser");
+                        location.href="/toPath/queryAllUser";
                     } else {
                         alert("添加失败");
-                        location.href("/user/toAddUser");
+                        location.href="/user/toAddUser";
                     }
                 })
             })

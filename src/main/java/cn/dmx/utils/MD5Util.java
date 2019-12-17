@@ -90,7 +90,7 @@ public class MD5Util {
 
 
 	public static void main(String[] args) {
-		String[] shuaikes = encryptPassword("liuyinlong", "123456");
+		String[] shuaikes = encryptPassword("zhoutian", "111111");
 		System.out.println(shuaikes[0]);
 		System.out.println(shuaikes[1]);
 	}
