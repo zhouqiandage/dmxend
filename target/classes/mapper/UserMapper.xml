@@ -27,7 +27,7 @@
         <if test="userName!=null and userName!=''">
             and u.userName like '%'||#{userName}||'%'
         </if>
-        <if test="status!=-1 and status!=''">
+        <if test="status!=-1">
             and u.status=#{status}
         </if>
     </select>

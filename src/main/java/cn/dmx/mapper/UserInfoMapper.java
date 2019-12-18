@@ -21,6 +21,9 @@ public interface UserInfoMapper {
     //查看个人信息
     UserInfo queryUser(Integer userId);
 
+    //修改个人信息
+    UserInfo updateUser(UserInfo userInfo);
+
     // 管理员修改用户密码
     Integer updatePwd(UserInfo userInfo);
 
@@ -32,9 +35,6 @@ public interface UserInfoMapper {
 
     //添加用户
     Integer addUser(UserInfo userInfo);
-
-
-
 
 
 }

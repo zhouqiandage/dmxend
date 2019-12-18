@@ -104,7 +104,6 @@ public class toPath {
         return JSON.toJSONString(concurrentMap);*/
         List<UserInfo> list=userInfoService.queryAllUser(userName,status);
         model.addAttribute("list",list);
-
        return "/user/user_list";
     }
 

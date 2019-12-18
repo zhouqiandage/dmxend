@@ -27,13 +27,16 @@
         <if test="userName!=null and userName!=''">
             and u.userName like '%'||#{userName}||'%'
         </if>
-        <if test="status!=-1 and status!=''">
+        <if test="status!=-1">
             and u.status=#{status}
         </if>
     </select>
     <select id="queryUser" parameterType="integer" resultType="UserInfo">
         select * from userInfo where userId=#{userId}
     </select>
+    <update id="updateUser">
+        update userinfo set userName=#{userName} where userId=#{userId}
+    </update>
     <update id="updateUserStatus" parameterType="integer">
         update userinfo set status=2 where userId=#{userId}
     </update>

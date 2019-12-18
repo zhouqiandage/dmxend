@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:shiro="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
@@ -17,8 +18,8 @@
 <div class="main-layout" id='main-layout'>
     <!--侧边栏-->
     <div class="main-layout-side">
-        <div class="m-logo">
-            <span>迪美视</span>
+        <div class="m-logo" style="background-color: #b2b2b2">
+            <span style="font-size: 40px;color: aqua" align="center">迪美视刻录</span>
         </div>
         <ul class="layui-nav layui-nav-tree" lay-filter="leftNav">
             <li class="layui-nav-item layui-nav-itemed">
@@ -59,18 +60,24 @@
                 <a href="javascript:;" data-url="/autoBurn" data-id='7' data-text="用户管理"><i
                         class="iconfont">&#xe60d;</i>用户管理</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="javascript:" data-url="/toPath/queryAllUser" data-id='1' data-text="所有用户"
+                    <dd><a href="javascript:" data-url="/toPath/queryAllUser" data-id='15' data-text="所有用户"
                            shiro:hasPermission="admin:queryUser"><span
                             class="l-line"></span>所有用户</a></dd>
-                    <dd><a href="javascript:" data-url="/user/toAddUser" data-id='12' data-text="添加用户"><span
+                    <dd><a href="javascript:" data-url="/user/toAddUser" data-id='16' data-text="添加用户"><span
                             class="l-line"></span>添加用户</a></dd>
                     <dd><a href="javascript:" th:data-url="@{/user/queryUser(userId=${session.userInfo.userId})}"
                            data-id='11' data-text="个人信息"><span
                             class="l-line"></span>个人信息</a></dd>
-                    <dd><a href="javascript:" th:data-url="@{/user/toUpdateUser(userId=${session.userInfo.userId})}"
-                           data-id='11' data-text="修改密码"><span
-                            class="l-line"></span>修改密码</a></dd>
-
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:" data-text="个人管理"><i
+                        class="iconfont">&#xe60d;</i>个人管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:" th:data-url="@{/user/toUpdatePwd2(userId=${session.userInfo.userId})}"
+                           data-id='17' data-text="密码管理"><span
+                            class="l-line"></span>密码管理</a></dd>
+                </dl>
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;" data-url="system.html" data-id='9' data-text="系统设置"><i
@@ -88,16 +95,18 @@
                 </a>
             </div>
             <ul class="layui-nav" lay-filter="rightNav">
-                <li class="layui-nav-item"><a href="javascript:;" data-url="email.html" data-id='4' data-text="邮件系统"><i
-                        class="iconfont">&#xe603;</i></a></li>
+
                 <li class="layui-nav-item">
-                    <a th:href="@{/user/queryUser(userId=${session.userInfo.userId})}" data-url="" data-id='5'
-                       data-text="个人信息" th:text="${session.userInfo.userName}"></a>
+                    <!-- <a th:href="@{/user/queryUser(userId=${session.userInfo.userId})}" data-url="" data-id='5'
+                        data-text="个人信息" th:text="${session.userInfo.userName}" style="color: red"></a>-->
+                    <span th:text="${session.userInfo.userName}" style="color: red"></span>
                 </li>
-                <li class="layui-nav-item">
-                    <a th:href="@{/user/toUpdatePwd2(userId=${session.userInfo.userId})}" data-url="" data-id='5' data-text="修改密码" th:text="修改密码"></a>
+                <!--<li class="layui-nav-item">
+                    <a th:href="@{/user/toUpdatePwd2(userId=${session.userInfo.userId})}" data-url="" data-id='5'
+                       data-text="修改密码" th:text="修改密码"></a>
+                </li>-->
+                <li class="layui-nav-item"><a href="javascript:if(confirm('确实要退出吗?')) location='/user/logout'">退出</a>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:if(confirm('确实要退出吗?')) location='/user/logout'">退出</a></li>
             </ul>
         </div>
         <!--主体内容-->
@@ -125,7 +134,6 @@
     </div>
 </div>
 <script type="text/javascript">
-
 
 
 </script>
